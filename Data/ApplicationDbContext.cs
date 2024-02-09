@@ -8,6 +8,7 @@ namespace NotasApi.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options){ } 
 
-        public DbSet<Note> Notes { get; set; } 
+        public DbSet<Note> Notes { get; set; }
+        public DbSet<Tag> Tags { get; set; }
     }
 }

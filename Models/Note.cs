@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotasApi.Models
 {
@@ -11,6 +12,9 @@ namespace NotasApi.Models
         public DateTime CreationDate { get; set; }
         public DateTime? ModificationDate { get; set; }
         public bool IsArchived { get; set; }
+        [ForeignKey("Id")]
+        public int? tagId { get; set; }
+        public Tag  Tag { get; set; }  
     }
 
 }
