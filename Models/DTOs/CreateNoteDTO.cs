@@ -11,5 +11,6 @@ namespace NotasApi.Models.DTOs
         [Required(ErrorMessage = "Must add Content")]
         [MaxLength(500, ErrorMessage = "Max 500 characters")]
         public string Content { get; set; }
+        public int? tagId { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace NotasApi.Models
         public bool IsArchived { get; set; }
         [ForeignKey("Id")]
         public int? tagId { get; set; }
-        public Tag  Tag { get; set; }  
+        public Tag Tag { get; set; }  
     }
 
 }

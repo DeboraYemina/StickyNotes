@@ -8,5 +8,6 @@
         public DateTime CreationDate { get; set; }
         public DateTime? ModificationDate { get; set; }
         public bool IsArchived { get; set; }
+        public int? tagId { get; set; }
     }
 }

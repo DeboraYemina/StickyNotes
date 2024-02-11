@@ -18,6 +18,8 @@ namespace NotasApi.Repositories.IRepositories
 
         bool ToggleArchiveNote(int noteId, bool archive);
 
+        ICollection<Note> GetNotesInTag(int tagId);    
+
         List<Note> GetActiveOrArchivedNotes(bool archived);
 
         bool Save();

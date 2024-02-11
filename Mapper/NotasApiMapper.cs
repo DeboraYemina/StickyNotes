@@ -10,6 +10,8 @@ namespace NotasApi.Mapper
         {
             CreateMap<Note, CreateNoteDTO>().ReverseMap();
             CreateMap<Note, NoteResponseDto>().ReverseMap();
+            CreateMap<Tag, CreateTagDTO>().ReverseMap();
+            CreateMap<Tag, TagResponseDTO>().ReverseMap();
         }
     }
 }

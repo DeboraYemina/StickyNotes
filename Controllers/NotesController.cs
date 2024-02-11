@@ -12,12 +12,14 @@ namespace NotasApi.Controllers
     public class NotesController : ControllerBase
     {
         private readonly INoteRepository _ntRepo;
+        private readonly ITagRepository _tagRepo;
         private readonly IMapper _mapper;
 
-        public NotesController(IMapper mapper, INoteRepository ntRepo)
+        public NotesController(IMapper mapper, INoteRepository ntRepo, ITagRepository tagRepo)
         {
             _ntRepo = ntRepo;
             _mapper = mapper;
+            _tagRepo = tagRepo;
         }
 
         [HttpPost]
@@ -32,7 +34,10 @@ namespace NotasApi.Controllers
                 return BadRequest(ModelState);
             }
 
+
             var note = _mapper.Map<Note>(createNoteDTO);
+
+            note.Tag = _tagRepo.GetTagById(createNoteDTO.tagId==null? 0 : Int32.Parse(createNoteDTO.tagId.ToString()));
             if (!_ntRepo.CreateNote(note))
             {
                 ModelState.AddModelError("", $"Couldn`t create Note {note.Title}");
@@ -92,7 +97,7 @@ namespace NotasApi.Controllers
 
             if (!_ntRepo.DeleteNote(note))
             {
-                ModelState.AddModelError("", $"Couldn`t delete Note{note.Title}");
+                ModelState.AddModelError("", $"Couldn`t delete Note {note.Title}");
                 return StatusCode(500, ModelState);
             }
 
@@ -119,6 +124,8 @@ namespace NotasApi.Controllers
 
             note.Title = noteDTO.Title;
             note.Content = noteDTO.Content;
+            note.tagId = noteDTO.tagId;
+            note.Tag=_tagRepo.GetTagById(noteDTO.tagId == null ? 0 : Int32.Parse(noteDTO.tagId.ToString()));
 
             if (!_ntRepo.UpdateNote(note))
             {
@@ -150,6 +157,25 @@ namespace NotasApi.Controllers
                 return StatusCode(500, ModelState);
             }
             return NoContent();
+        }
+
+        [HttpGet("GetNotesInTag/{tId:int}")]
+        public IActionResult GetNotesInTag(int tId)
+        {
+            var noteList = _ntRepo.GetNotesInTag(tId);
+
+            if(noteList==null)
+            {
+                return NotFound();
+            }
+
+            var itemNote = new List<NoteResponseDto>();
+
+            foreach (var n in noteList)
+            {
+                itemNote.Add(_mapper.Map<NoteResponseDto>(n));
+            }
+            return Ok(itemNote);
         }
     }
 }

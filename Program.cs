@@ -18,7 +18,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
 });
 
-builder.Services.AddScoped<INoteRepository, NoteRepository>(); 
+builder.Services.AddScoped<INoteRepository, NoteRepository>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddAutoMapper(typeof(NotasApiMapper));
 
 var app = builder.Build();

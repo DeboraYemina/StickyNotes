@@ -73,5 +73,10 @@ namespace NotasApi.Repositories
         {
             return _db.Notes.OrderBy(n=>n.CreationDate).ToList();
         }
+
+        public ICollection<Note> GetNotesInTag(int tId)
+        {
+            return _db.Notes.Include(n => n.Tag).Where(n=>n.tagId==tId).ToList();        
+        }
     }
 }
