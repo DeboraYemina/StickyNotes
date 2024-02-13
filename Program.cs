@@ -22,6 +22,11 @@ builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddAutoMapper(typeof(NotasApiMapper));
 
+builder.Services.AddCors(p=>p.AddPolicy("PolicyCors", build =>
+{
+    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("PolicyCors");
 
 app.UseHttpsRedirection();
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NotasApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d9a81b5a1af0929a65af554fd1a83a2d7ddc81f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be0d7c8bbf0d19c9b402248de8f7354c00819a0f")]
 [assembly: System.Reflection.AssemblyProductAttribute("NotasApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NotasApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
